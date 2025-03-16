@@ -38,97 +38,111 @@ The Flask app will start at http://127.0.0.1:5000.
 1️⃣ Configure the Load Balancer
 📌 Setup servers and clients
 
-http
+```http
 POST /configure
+```
 Request Body:
 
-json
+```json
 {
     "num_servers": 3,
     "num_clients": 2,
     "requests_per_client": 2
 }
+```
 Response:
-
-json
+```json
 {
     "servers": 3,
     "clients": 2,
     "requests_per_client": 2
 }
+```
 2️⃣ Add a Request
 📌 Client sends a request
 
-http
+```http
 POST /send_request
+```
 Request Body:
 
-json
+```json
 {
     "client_id": 0,
     "request_id": 101,
     "priority": 1
 }
+```
 Response:
 
-json
+```json
 {
     "message": "Request 101 added successfully!"
 }
+```
 3️⃣ Retrieve All Requests
 📌 Get all requests (both pending & processed)
 
-http
+```http
 GET /requests
+```
 Response Example:
 
-json
+```json
 [
     {"client_id": 0, "request_id": 101, "priority": 1, "status": "processed"},
     {"client_id": 1, "request_id": 102, "priority": 5, "status": "pending"}
 ]
+```
 4️⃣ Check Server Status
 📌 Get the current load on all servers
 
-http
+```http
 GET /servers
+```
 Response Example:
 
-json
+```json
 [
     {"server_id": 0, "handled_requests": 2, "active": true},
     {"server_id": 1, "handled_requests": 1, "active": true},
     {"server_id": 2, "handled_requests": 0, "active": false}
 ]
+```
 5️⃣ Simulate Server Failure & Recovery
 📌 Mark a server as down
 
-json
+```json
 POST /server_down/1
+```
 Response:
 
-json
+```json
 {
     "message": "Server 1 marked as down"
 }
+```
 📌 Mark a server back online
 
-http
+```http
 POST /server_up/1
+```
 Response:
 
-json
+```json
 {
     "message": "Server 1 marked as up"
 }
+```
 6️⃣ Retrieve System Logs
 📌 Get all logs
 
-http
+```http
 GET /logs
+```
 Response Example:
 
-json
+```json
 {
     "logs": [
         "System configured with 3 servers and 2 clients.",
@@ -136,17 +150,20 @@ json
         "✅ Request 101 assigned to Server 0"
     ]
 }
+```
 📌 Download logs as a file
 
-http
+```http
 GET /logs/download
+```
 (Automatically downloads a load_balancer_logs.txt file)
 
 📊 Live Monitoring
 Run the monitor script to check server load & requests in real-time:
 
-sh
+```sh
 python monitor.py
+```
 🔹 Sample output:
 
 ```yaml
