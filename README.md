@@ -151,12 +151,11 @@ Response Example:
     ]
 }
 ```
-📌 Download logs as a file
+📌 View logs
 
 ```http
-GET /logs/download
+GET /logs
 ```
-(Automatically downloads a load_balancer_logs.txt file)
 
 📊 Live Monitoring
 Run the monitor script to check server load & requests in real-time:
